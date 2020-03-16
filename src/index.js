@@ -38,8 +38,31 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
+    let asb = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.",
+      "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..","-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----."];
+    let max = 10;
+    let cur = 0;
+    let rezult = "";
+    while (cur < expr.length) {
+      let i = cur;
+      if (expr[i] != "*") {
+        while (expr[i] == 0) {
+          i++;
+        }
+        rez = "";
+        for (i; i < max; i += 2) {
+          rez += expr[i + 1] == 0 ? '.' : '-';
+        }
+        let ind = asb.indexOf(rez);
+        ind += ind > 25 ? 22 : 65;
+        rezult += String.fromCharCode(ind);
+      }
+      else rezult += " ";
+      max += 10;
+      cur += 10;
+    }
+    return rezult.toLowerCase();
+  }
 
 module.exports = {
     decode
